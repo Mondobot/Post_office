@@ -1,0 +1,69 @@
+Obiective:
+	* Sa implementeze cozi si stive generice
+	* Sa defineasca si sa utilizeze tipuri de date proprii
+
+Story:
+	Pentru a mari siguranta la un centru de colectare a pachetelelor,
+serviciul de securitate din cadrul postei are nevoie de o metoda
+de a putea afla exact ce pachete sunt primite si in ce ordine.
+
+	Ei s-au gandit ca cel mai bun este un simulator al activitatii
+de primire si procesare a pacheteleor care sa functioneze cu date
+stranse periodic de la fiecare ghiseu (ma rog, centru ce colectare
+si procesare)
+
+	In acest scop v-au angajat pe voi sa le construiti simulatorul
+(Da, suna 80% lame, sper sa scoatem ceva mai bun).
+
+Specificatii:
+	Trebuie sa implmentati un simulator simplu al activitatii
+din centrul de colectare a pachetelor respectand urmatoarele specificatii:
+	In sala de colectare se gasesc Persoane si Ghisee de colectare:
+
+	Persoane:
+	* Fiecare individ are un ID unic (un numar intreg)
+	* Fiecare persoana vrea sa depuna exact un pachet, pachetul cantarind
+o anumita greutate (PACKAGE_WEIGHT)
+	* Pentru a-si depune pachetul oamenii se aseaza in fata unui ghiseu la
+o coada
+
+	Ghisee:
+	* Sala are N ghisee cu ID_uri intre 0 si N-1
+	* Fiecare ghiseu are un fata sa o coada formata din oameni ce vor
+sa isi depuna pachetul
+	* Fiecare ghiseu accepta pachete cu masele in W_MIN si W_MAX
+	* Daca greutatea nu se afla intre W_MIN si W_MAX se refuza preluarea
+pachetului si persoana se muta la coada cu urmatorul ID (% N)
+	* Se garanteaza ca nu exista oameni cu pachete ce nu pot fi primite
+la nici un ghiseu (prea grele sau prea usoare)
+	* De asemenea, fiecare ghiseu are o stiva de pachete colectate
+	* In momentul cand se proceseaza un pachet si el este acceptat,
+pachetul se pune in stiva
+	* Stiva poate tine maxim Q elemente si maxim K grame
+	* Daca se depasesc Q elemente sau K grame stiva este golita
+si continutul ei este trimis spre livrare
+
+	Input:
+	Simulatorul vostru va primi atat date cat si comenzi prin intermediul
+unui fisier dat ca parametru din linia de comanda.
+	Ora de ora se primesc date si comezni:
+		- Date:
+			*ADD_GHISEU, ID, W_MIN, W_MAX
+			*ADD_PERSON ID, PACKAGE_WEIGHT, ID_GHISEU //persoana s-a
+												asezat la ...
+			*PROCCESS ID_GHISEU, NR_PPL
+			*FLUSH
+			*FLUSH
+			*PRINT
+			*PRINT
+	
+
+
+	* In cadrul centrului aveti N ghisee ce colecteaza si proceseaza pachete
+	* Fiecare ghiseu are o limita maxima si una minima a greutatii unui pachet
+pe care il accepta
+	* In fata fiecarui ghiseu se formeaza o coada de persoane ce vor sa-si
+depuna pachetele
+	* Fiecare persoana este identificata dupa un ID si greutatea pachetului
+pe care il depune (presupunem ca fiecare persoana depune exact un pachet)
+	*

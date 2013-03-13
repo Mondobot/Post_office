@@ -1,13 +1,12 @@
 		Simulator de cozi
 
-
 - N cozi de persoane (id, greutate_pachet)
 - N si comezile date in fisier
 - structura:
 
-
 	BEGIN
-	* ADD ID, GREUTATE, ID_COADA
+	* ADD_GHISEU ID, W_MIN, W_MAX
+	* ADD ID, PACKAGE_WEIGHT, ID_GHISEU
 	* PROCCESS ID_COADA, NR_PPL
 	* PRINT_QUEUES
 	* PRINT_STACKS
@@ -15,3 +14,21 @@
 	* FLUSH_STACK ID_COADA
 	END
 FINISH
+
+GHISEU: {
+	* ID;
+	* W_MIN
+	* W_MAX
+	* COADA
+	* STIVA
+}
+
+COZI:
+	* MAX_SIZE?
+
+STIVE:
+
+PPL:
+	* ID
+	* PACKAGE_WEIGHT
+

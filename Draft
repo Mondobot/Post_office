@@ -1,69 +1,121 @@
+Tema 1 - Centru de colectare a pachetelor
+
 Obiective:
+
 	* Sa implementeze cozi si stive generice
 	* Sa defineasca si sa utilizeze tipuri de date proprii
 
-Story:
+
+Introducere:
+
 	Pentru a mari siguranta la un centru de colectare a pachetelelor,
 serviciul de securitate din cadrul postei are nevoie de o metoda
-de a putea afla exact ce pachete sunt primite si in ce ordine.
+pentru putea afla exact ce pachete sunt primite si in ce ordine.
 
-	Ei s-au gandit ca cel mai bun este un simulator al activitatii
-de primire si procesare a pacheteleor care sa functioneze cu date
-stranse periodic de la fiecare ghiseu (ma rog, centru ce colectare
+        Dupa ce s-au alocat niste bani de la buget si s-au consultat
+niste experti pe probleme de securitate, s-a ajuns la concluzia ca 
+cea mai buna solutie este supravegherea permanenta a fluxului de persoane.	
+
+        Intrucat un sistem informatic bazat pe supraveghere video 
+este mult prea costisitor din punct de vedere al resurselor umane si materiale,
+s-a propus realizarea unui simulator de procesare a pacheteleor care sa functioneze cu date
+stranse periodic de la fiecare ghiseu (ma rog, centru de colectare
 si procesare)
 
-	In acest scop v-au angajat pe voi sa le construiti simulatorul
-(Da, suna 80% lame, sper sa scoatem ceva mai bun).
+        Cum cea mai ieftina si buna mana de lucru se gaseste printre studentii
+de la Politehnica, departamentul de securitate a decis sa va angajeze pe voi 
+pentru realizarea simulatorului.
+
+
+Cerinta:
+
+	Trebuie sa implmentati un simulator simplu al activitatii
+din centrul de colectare a pachetelor.
 
 Specificatii:
-	Trebuie sa implmentati un simulator simplu al activitatii
-din centrul de colectare a pachetelor respectand urmatoarele specificatii:
 	In sala de colectare se gasesc Persoane si Ghisee de colectare:
 
-	Persoane:
-	* Fiecare individ are un ID unic (un numar intreg)
+    Persoane:
+	* Fiecare individ are un PERSONAL_ID unic
 	* Fiecare persoana vrea sa depuna exact un pachet, pachetul cantarind
 o anumita greutate (PACKAGE_WEIGHT)
-	* Pentru a-si depune pachetul oamenii se aseaza in fata unui ghiseu la
-o coada
+	* Pentru a-si depune pachetul oamenii se aseaza la coada unui ghiseu
 
-	Ghisee:
-	* Sala are N ghisee cu ID_uri intre 0 si N-1
-	* Fiecare ghiseu are un fata sa o coada formata din oameni ce vor
+    Ghisee:
+	* Sala are N ghisee fiecare cu un BOOTH_ID unic
+	* Fiecare ghiseu are in fata sa o coada formata din oameni ce vor
 sa isi depuna pachetul
-	* Fiecare ghiseu accepta pachete cu masele in W_MIN si W_MAX
-	* Daca greutatea nu se afla intre W_MIN si W_MAX se refuza preluarea
-pachetului si persoana se muta la coada cu urmatorul ID (% N)
+	* Fiecare ghiseu accepta pachete cu greutate intre WEIGHT_MIN si WEIGHT_MAX
+	* Daca greutatea pachetului primei persoane din coada nu se afla intre 
+WEIGHT_MIN si WEIGHT_MAX se refuza preluarea pachetului si persoana se muta la
+alta coada
 	* Se garanteaza ca nu exista oameni cu pachete ce nu pot fi primite
 la nici un ghiseu (prea grele sau prea usoare)
-	* De asemenea, fiecare ghiseu are o stiva de pachete colectate
-	* In momentul cand se proceseaza un pachet si el este acceptat,
-pachetul se pune in stiva
+	* Fiecare ghiseu are o stiva de pachete colectate
+	* In momentul in care se proceseaza un pachet si el este acceptat,
+pachetul se pune in stiva ghiseului respectiv
 	* Stiva poate tine maxim Q elemente si maxim K grame
-	* Daca se depasesc Q elemente sau K grame stiva este golita
+	* Daca se depasesc Q elemente sau K grame, stiva este golita
 si continutul ei este trimis spre livrare
+        * Un ghiseu poate procesa un numar de persoane doar in ordinea in care se afla la coada.
+Procesarea unei persoane implica verificarea greutatii pachetului (daca este
+acceptat sau respins) si eliminarea acesteia din coada. Daca pachetul este
+acceptat persoana este fericita si pleaca acasa. Daca nu se duce la coada cu
+urmatoru ID.
 
-	Input:
-	Simulatorul vostru va primi atat date cat si comenzi prin intermediul
-unui fisier dat ca parametru din linia de comanda.
-	Ora de ora se primesc date si comezni:
-		- Date:
-			*ADD_GHISEU, ID, W_MIN, W_MAX
-			*ADD_PERSON ID, PACKAGE_WEIGHT, ID_GHISEU //persoana s-a
-												asezat la ...
-			*PROCCESS ID_GHISEU, NR_PPL
-			*FLUSH
-			*FLUSH
-			*PRINT
-			*PRINT
-	
+Precizari de implementare:
+        * PERSONAL_ID este un numar intreg
+        * BOOTH_ID este un numar intreg intre 0 si N-1
+        * WEIGHT_MIN, WEIGHT_MAX, K si Q sunt numere intregi
+        * Daca persoanei care sta la ghiseul cu BOOTH_ID i se refuza
+pachetul, aceasta se muta la ghiseul cu BOOTH_ID + 1
+        * Daca nu exista coada cu BOOTH_ID + 1, se muta la prima coada (BOOTH_ID + 1 % N)
 
+   Input:
+	Simulatorul vostru va primi comenzi prin intermediul unui fisier dat ca parametru
+ din linia de comanda.
+	Formatul fiserului de intrare:
+        N
+        <comanda> <args>
+        <comanda> <args>
+        .
+        .
+        .
+        <comanda> <args>
 
-	* In cadrul centrului aveti N ghisee ce colecteaza si proceseaza pachete
-	* Fiecare ghiseu are o limita maxima si una minima a greutatii unui pachet
-pe care il accepta
-	* In fata fiecarui ghiseu se formeaza o coada de persoane ce vor sa-si
-depuna pachetele
-	* Fiecare persoana este identificata dupa un ID si greutatea pachetului
-pe care il depune (presupunem ca fiecare persoana depune exact un pachet)
-	*
+         Comenzi posibile:
+	   *ADD_GHISEU BOOTH_ID W_MIN W_MAX
+                Adauga un nou ghiseu 
+                - BOOTH_ID - id-ul ghiseului care se deschide
+                - W_MIN - Greutatea minima acceptata
+                - W_MAX - Greutatea maxim acceptata
+
+	   *ADD_PERSON PERSONAL_ID, PACKAGE_WEIGHT, BOOTH_ID
+                Adauga persoana la coada specificata			
+		- PERSONAL_ID - id-ul persoanei care se aseaza la coada
+                - PACKAGE_WEIGHT - greutatea pachetului
+                - BOOTH_ID - ghiseul la care se aseaza
+
+           *PROCCESS BOOTH_ID, NR_PPL
+                Ghiseu BOOTH_ID proceseaza un numar de NR_PPL persoane
+
+           *PROCESS_ALL BOOTH_ID
+                Ghiseul BOOTH_ID proceseaza toate persoanele aflate la propria coada
+
+           *FLUSH_STACKS
+                Toate ghiseele elibereaza stiva de pachete
+
+           *PRINT_STACKS:
+                Afiseaza la iesirea standard starea tuturor stivelor in ordinea id-urilor:
+                <STACKS>
+                BOOTH_ID: (PERSONAL_ID, PACKAGE_WEIGHT), ...
+                BOOTH_ID: (PERSONAL_ID, PACKAGE_WEIGHT), ...
+
+           *PRINT_QUEUES:
+                Afiseaza la iesirea standard starea cozilor din fata tuturor ghiseelor:
+                <QUEUES>
+                BOOTH_ID: (PERSONAL_ID, PACKAGE_WEIGHT), ...
+                BOOTH_ID: (PERSONAL_ID, PACKAGE_WEIGHT), ...
+
+Depunctari:
+   -

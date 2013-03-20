@@ -3,6 +3,9 @@
 #ifndef __STACK__H
 #define __STACK__H
 
+#define FWD 1
+#define REV -1
+
 // Primul argument al template-ului este tipul de date T
 // Al doilea argument este dimensiunea maxim a stivei N
 template<typename T>
@@ -27,7 +30,7 @@ public:
 
 	// operator de adaugare
 	void push(T x) {
-		if (topLevel == N - 1)
+		if (isFull())
 			return;
 
 		stackArray[++topLevel] = x;
@@ -54,12 +57,33 @@ public:
 		return (topLevel == -1);
 	}
 
-	void printStack() {
-		for (i = 0; i < topLevel; ++i)
+	int isFull() {
+		return (topLevel == N - 1);
+	}
+
+	// This is a hackty hack
+	void printStack(int dir) {
+		int first, last;
+
+		if (dir == FWD) {
+			first = 0;
+			last = topLevel;
+
+		} else {
+			first = topLevel;
+			last = 1;
+		}
+
+		for (i = first; i < last; i += dir)
 			std::cout << stackArray[i] << ", ";
 
 		if (!isEmpty())
-			std::cout << stackArray[topLevel];
+			std::cout << stackArray[last + dir] << std::endl;
+	}
+
+	void clear() {
+		while (!isEmpty())
+			pop();
 	}
 };
 #endif // __STACK__H

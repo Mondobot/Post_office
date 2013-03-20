@@ -1,3 +1,6 @@
+#include <stdlib.h>
+#include <iostream>
+
 #ifndef __QUEUE__H
 #define __QUEUE__H
 
@@ -67,6 +70,14 @@ public:
 
 	bool isEmpty() {
 		return (size == 0);
+	}
+
+	void printQueue() {
+		for (i = first; i != tail; i = (i + 1) % N)
+			std::cout << queueArray[i];
+
+		if (!isEmpty())
+			std::cout << queueArray[tail] << std::endl;
 	}
 };
 #endif

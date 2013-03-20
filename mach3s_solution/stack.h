@@ -34,19 +34,19 @@ public:
 	}
 
 	// operatorul de stergere
-	T pop() {
+	T* pop() {
 		if (isEmpty())
-			return (T)0;
+			return NULL;
 
-		return stackArray[topLevel--];
+		return &stackArray[topLevel--];
 	}
 
 	// operatorul de consultare
 	T peek() {
 		if (isEmpty())
-			return (T)0;
+			return NULL;
 
-		return stackArray[topLevel];
+		return &stackArray[topLevel];
 	}
 
 	// operatorul de verificare dimensiune

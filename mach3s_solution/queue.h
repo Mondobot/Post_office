@@ -46,11 +46,11 @@ public:
 	}
 
 	// Extrage din coada
-	T dequeue() {
+	T* dequeue() {
 		if (isEmpty())
-			return (T)0;
+			return NULL;
 
-		T ret_val = queueArray[head];
+		T* ret_val = &queueArray[head];
 		head = (head + 1) % N;
 		--size;
 
@@ -58,11 +58,11 @@ public:
 	}
 
 	// Afla primul element
-	T front() {
+	T* front() {
 		if (isEmpty())
 			return (T)0;
 
-		return queueArray[head];
+		return &queueArray[head];
 	}
 
 	bool isEmpty() {

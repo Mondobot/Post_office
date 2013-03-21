@@ -11,6 +11,12 @@ typedef struct Guy {
 	int package_weight;
 
 	Guy(int id, int package_weight): id(id), package_weight(package_weight) {}
+
+	friend std::ostream& operator<<(std::ostream& out, Guy& x) {
+		out << "(" << x.id << ", " << x.package_weight << ")";
+		return out;
+	}
+
 } guy;
 
 class Booth {
@@ -22,12 +28,12 @@ private:
 	Queue<Guy> *funny_ppl;
 
 public:
-	Booth(int id, int w_min, int w_max, int q, int k): 
-			id(id), w_min(w_min), w_max(w_max),
-			stack_size(q), w_max_on_stack(k), current_w(0) {
+	Booth(int id, int w_min, int w_max, int q, int k):
+			id(id), stack_size(q), p_w_min(w_min),
+			p_w_max(w_max), current_w(0), w_max_on_stack(k) {
 
 		ok_packages = new Stack<int>(q);
-		funny_ppl = new Queue<Guy>(10);
+		funny_ppl = new Queue<Guy>(2);
 	}
 
 	~Booth() {
@@ -36,7 +42,7 @@ public:
 	}
 
 	void addGuy(int id, int package_weight) {
-		funny_ppl->enqueue(Guy(id, package_weight));
+		funny_ppl->enqueue(new Guy(id, package_weight));
 	}
 
 	Guy* process() {
@@ -54,10 +60,11 @@ public:
 				current_w = 0;
 			}
 
-			ok_packages->push(*lucky_one);
+			//std::cout << "Adaug " << lucky_one << "\n";
+			ok_packages->push(lucky_one->package_weight);
 			current_w += lucky_one->package_weight;
 
-			return NULL;
+			return (Guy *)1;
 		}
 
 		return lucky_one;
@@ -72,13 +79,16 @@ public:
 	}
 
 	void printStack() {
-		std::cout << id << ": ";
+		std::cout << "S " << id << ": ";
 		ok_packages->printStack(FWD);
+
+		std::cout << "\n";
 	}
 
 	void printQueue() {
-		std::cout << id << ": ";
+		std::cout << "Q " << id << ": ";
 		funny_ppl->printQueue();
+		std::cout << "\n";
 	}
 };
 #endif

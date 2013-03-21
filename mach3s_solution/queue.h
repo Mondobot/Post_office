@@ -11,12 +11,12 @@ private:
 	int tail;
 	int size;
 	int N;
-	T *queueArray;
+	T **queueArray;
 
 public:
 	// Constructor
 	Queue(int max_size): head(-1), tail(-1), size(0), N(max_size) {
-		queueArray = malloc((N + 1) * sizeof(T);
+		queueArray = (T**)malloc((N + 1) * sizeof(T*));
 	}
 
 	// Destructor
@@ -25,10 +25,10 @@ public:
 	}
 
 	// Adauga la coada
-	void enqueue(T e) {
+	void enqueue(T *e) {
 		if (size == N) {
 			int i = -1;
-			T *aux = malloc(2 * N * sizeof(T));
+			T **aux = (T**)malloc(2 * N * sizeof(T*));
 
 			while (!isEmpty())
 				aux[++i] = dequeue();
@@ -53,7 +53,7 @@ public:
 		if (isEmpty())
 			return NULL;
 
-		T* ret_val = &queueArray[head];
+		T* ret_val = queueArray[head];
 		head = (head + 1) % N;
 		--size;
 
@@ -63,9 +63,9 @@ public:
 	// Afla primul element
 	T* front() {
 		if (isEmpty())
-			return (T)0;
+			return NULL;
 
-		return &queueArray[head];
+		return queueArray[head];
 	}
 
 	bool isEmpty() {
@@ -73,11 +73,11 @@ public:
 	}
 
 	void printQueue() {
-		for (i = first; i != tail; i = (i + 1) % N)
-			std::cout << queueArray[i];
+		for (int i = head; i != tail; i = (i + 1) % N)
+			std::cout << *(queueArray[i]) << ", ";
 
 		if (!isEmpty())
-			std::cout << queueArray[tail] << std::endl;
+			std::cout << *(queueArray[tail]) << std::endl;
 	}
 };
 #endif

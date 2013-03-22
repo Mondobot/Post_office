@@ -64,7 +64,7 @@ public:
 			ok_packages->push(lucky_one->package_weight);
 			current_w += lucky_one->package_weight;
 
-			return (Guy *)1;
+			return NULL;
 		}
 
 		return lucky_one;
@@ -74,21 +74,27 @@ public:
 		std::cout << id << ": ";
 
 		ok_packages->printStack(REV);
+		std::cout << std::endl;
 		ok_packages->clear();
 		current_w = 0;
+		
 	}
 
 	void printStack() {
-		std::cout << "S " << id << ": ";
-		ok_packages->printStack(FWD);
+		std::cout << id << ": ";
+		ok_packages->printStack(REV);
 
-		std::cout << "\n";
+		std::cout << std::endl;
 	}
 
 	void printQueue() {
-		std::cout << "Q " << id << ": ";
+		std::cout << id << ": ";
 		funny_ppl->printQueue();
-		std::cout << "\n";
+		std::cout << std::endl;
+	}
+
+	int getQueueSize() {
+		return funny_ppl->getSize();
 	}
 };
 #endif

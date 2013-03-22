@@ -77,7 +77,11 @@ public:
 			std::cout << *(queueArray[i]) << ", ";
 
 		if (!isEmpty())
-			std::cout << *(queueArray[tail]) << std::endl;
+			std::cout << *(queueArray[tail]);
+	}
+
+	int getSize() {
+		return size;
 	}
 };
 #endif

@@ -82,9 +82,8 @@ public:
 			std::cout << stackArray[i] << ", ";
 
 		if (!isEmpty())
-			std::cout << stackArray[last] << std::endl;
+			std::cout << stackArray[last];
 
-		//std::cout << " SIZE: " << topLevel + 1;
 	}
 
 	void clear() {

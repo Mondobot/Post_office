@@ -33,7 +33,7 @@ public:
 			p_w_max(w_max), current_w(0), w_max_on_stack(k) {
 
 		ok_packages = new Stack<int>(q);
-		funny_ppl = new Queue<Guy>(2);
+		funny_ppl = new Queue<Guy>(10);
 	}
 
 	~Booth() {

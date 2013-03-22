@@ -50,12 +50,14 @@ public:
 
 	// Extrage din coada
 	T* dequeue() {
+		//std::cout << "FAC DQ!\n";
 		if (isEmpty())
 			return NULL;
 
 		T* ret_val = queueArray[head];
 		head = (head + 1) % N;
 		--size;
+		//std::cout << "NEW_HEAD " << head << "  <__> SIZE " << size << "\n";
 
 		return ret_val;
 	}
@@ -73,11 +75,14 @@ public:
 	}
 
 	void printQueue() {
-		for (int i = head; i != tail; i = (i + 1) % N)
-			std::cout << *(queueArray[i]) << ", ";
+		//std::cout << "~TAIL = " << tail << "~ ";
+		//std::cout << head << " " << tail << " " << size << "\n";
+		for (int i = 0; i < size - 1; ++i)
+			//std::cout << 
+			std::cout << *(queueArray[(head + i) % N]) << ", ";
 
 		if (!isEmpty())
-			std::cout << *(queueArray[tail]);
+			std::cout << *(queueArray[(head + size - 1) % N]);
 	}
 
 	int getSize() {

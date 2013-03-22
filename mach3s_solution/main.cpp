@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
 			center->process(params[0], params[1]);
 
 		} else if (strcmp(command, PROCESS_ALL) == 0) {
+			//std::cout << "INTRA\n";
 			read_params(fin, params, 1);
 			center->processAll(params[0]);
 
@@ -70,6 +71,7 @@ int main(int argc, char *argv[])
 		}
 
 		fin >> command;
+		//std::cout << "Am citit: " << command << std::endl;
 	}
 
 	return 0;

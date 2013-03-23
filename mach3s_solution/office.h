@@ -50,7 +50,7 @@ public:
 			if (gigel == NULL)
 				continue;
 
-			for (int j = (booth_id + 1) % no_booths; j < no_booths; ++j)
+			for (int j = (booth_id + 1) % no_booths; j < no_booths; j = (j + 1) % no_booths)// ++j)
 				if (booths_list[j % no_booths] != NULL) {
 					addGuy(gigel->id, gigel->package_weight, j % no_booths);
 					delete gigel;

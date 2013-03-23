@@ -1,0 +1,10 @@
+
+Se ruleaza:
+
+$ bash testgen.sh
+
+apoi
+
+$ bash test.sh <nume_executabil> 10 // pt 10 teste
+
+Inca nu am facut un script de testare. trebuie multe diffuri :D
